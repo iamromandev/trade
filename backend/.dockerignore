@@ -1,0 +1,17 @@
+### allow ###
+!.env.example
+
+### core ###
+.idea
+.vscode
+.DS_Store
+
+### cache ###
+__pycache__
+.pytest_cache
+.ruff_cache
+.venv
+
+### generated ###
+**/*.lock
+**/*.pyc
