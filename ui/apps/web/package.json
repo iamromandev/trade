@@ -1,0 +1,37 @@
+{
+  "name": "web",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "fmt": "bunx prettier . --write",
+    "fmt.chk": "bunx prettier --check .",
+    "chk": "bunx tsc --noEmit",
+    "dev": "bunx vite --mode ssr",
+    "build": "bunx vite build"
+  },
+  "dependencies": {
+    "@qwik-ui/headless": "^0.7.7",
+    "@qwik-ui/utils": "^0.3.3",
+    "@qwik.dev/core": "^2.0.0-beta.36",
+    "@qwik.dev/router": "^2.0.0-beta.36",
+    "@qwikest/icons": "^0.0.13",
+    "class-variance-authority": "^0.7.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "latest",
+    "@types/bun": "latest",
+    "typescript": "latest",
+    "tailwindcss": "latest",
+    "vite": "^7.2.1",
+    "prettier": "^3.9.4",
+    "typescript-plugin-css-modules": "^5.2.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "prettier-plugin-multiline-arrays": "^4.0.3",
+    "prettier-plugin-tailwindcss": "^0.7.1"
+  },
+  "peerDependencies": {
+    "typescript": "latest"
+  }
+}

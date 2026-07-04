@@ -1,7 +1,6 @@
 # core
 .idea
 .ds_store
-.vscode
 
 # project
 node_modules

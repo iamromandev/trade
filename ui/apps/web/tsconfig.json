@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
     // Environment setup & latest features
-    "lib": ["ESNext"],
     "target": "ESNext",
     "module": "Preserve",
+    "lib": [
+      "ESNext",
+      "DOM",
+      "WebWorker",
+      "DOM.Iterable"
+    ],
     "moduleDetection": "force",
     "jsx": "react-jsx",
+    "jsxImportSource": "@qwik.dev/core",
     "allowJs": true,
     "types": ["bun"],
 
@@ -21,10 +27,34 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "incremental": true,
+    "isolatedModules": true,
 
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
-  }
+    "noPropertyAccessFromIndexSignature": false,
+
+    // Other
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
+  },
+  "include": [
+    "src",
+    "./*.d.ts",
+    "./*.config.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

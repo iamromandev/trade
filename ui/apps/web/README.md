@@ -1,4 +1,4 @@
-# ui
+# web
 
 To install dependencies:
 

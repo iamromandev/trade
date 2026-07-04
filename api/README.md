@@ -1,4 +1,4 @@
-# Trade Backend
+# Trade API
 
 Production-ready FastAPI backend with PostgreSQL, Tortoise ORM, JWT auth, and full middleware stack.
 

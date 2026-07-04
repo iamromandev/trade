@@ -4,7 +4,7 @@
 ### core ###
 .idea
 .vscode
-.DS_Store
+.ds_store
 
 ### cache ###
 __pycache__
