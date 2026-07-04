@@ -1,3 +1,5 @@
+from collections.abc import AsyncGenerator
+from typing import Annotated
 from uuid import UUID
 
 from fastapi import Depends
@@ -10,24 +12,25 @@ from src.core.security import JWT_ACCESS_TYPE, decode_token
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login", auto_error=False)
 
 
-async def get_current_user_id(token: str | None = Depends(oauth2_scheme)) -> UUID | None:
+async def get_current_user_id(token: Annotated[str | None, Depends(oauth2_scheme)]) -> AsyncGenerator[UUID | None]:
     if not token:
-        return None
+        yield None
+        return
     settings = get_settings()
     try:
         payload = decode_token(token, settings.jwt_secret_value, settings.jwt_algorithm, JWT_ACCESS_TYPE)
-        return UUID(payload.sub)
+        yield UUID(payload.sub)
     except Exception:
-        return None
+        yield None
 
 
-async def require_user_id(token: str | None = Depends(oauth2_scheme)) -> UUID:
+async def require_user_id(token: Annotated[str | None, Depends(oauth2_scheme)]) -> AsyncGenerator[UUID]:
     if not token:
         raise Error.unauthorized("Not authenticated")
     settings = get_settings()
     try:
         payload = decode_token(token, settings.jwt_secret_value, settings.jwt_algorithm, JWT_ACCESS_TYPE)
-        return UUID(payload.sub)
+        yield UUID(payload.sub)
     except Error:
         raise
     except Exception:

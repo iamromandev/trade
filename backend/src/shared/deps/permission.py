@@ -1,5 +1,6 @@
 from enum import StrEnum
 from functools import lru_cache
+from typing import Annotated
 from uuid import UUID
 
 from fastapi import Depends
@@ -29,7 +30,7 @@ class CurrentPrincipal:
 
 def require_role(*allowed: Role):
     @lru_cache
-    def dependency(_user_id: UUID = Depends(require_user_id)) -> CurrentPrincipal:
+    def dependency(_user_id: Annotated[UUID, Depends(require_user_id)]) -> CurrentPrincipal:
         return CurrentPrincipal(user_id=_user_id, role=Role.USER)
 
     return Depends(dependency)
@@ -37,7 +38,7 @@ def require_role(*allowed: Role):
 
 def require_permission(permission: Permission):
     @lru_cache
-    def dependency(_user_id: UUID = Depends(require_user_id)) -> CurrentPrincipal:
+    def dependency(_user_id: Annotated[UUID, Depends(require_user_id)]) -> CurrentPrincipal:
         return CurrentPrincipal(user_id=_user_id, role=Role.USER)
 
     return Depends(dependency)

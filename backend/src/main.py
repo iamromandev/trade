@@ -9,9 +9,7 @@ from src.config.logging import configure_logging
 from src.core.common import get_app_version
 from src.core.error import init_global_errors
 from src.data.db import init_db
-from src.module.auth import auth_router
-from src.module.health import router as health_router
-from src.module.user import user_router
+from src.route import router as api_router
 from src.shared.middleware.error_boundary import ErrorBoundaryMiddleware
 from src.shared.middleware.logging import LoggingMiddleware
 from src.shared.middleware.request_id import RequestIdMiddleware
@@ -67,9 +65,7 @@ def create_app() -> FastAPI:
             return Response(content=body, media_type=content_type)
 
     # Routers
-    app.include_router(health_router, prefix="")
-    app.include_router(auth_router, prefix="")
-    app.include_router(user_router, prefix="")
+    app.include_router(api_router, prefix="")
 
     init_db(app)
 
