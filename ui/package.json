@@ -25,22 +25,5 @@
     "_service:restart": "bun run reinstall && bun run service:dev",
     "web:start": "bun install && bun run web:dev",
     "_service:start": "bun install && bun run service:dev"
-  },
-
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.3.2",
-    "@types/bun": "latest",
-    "prettier-plugin-multiline-arrays": "^4.1.10",
-    "prettier-plugin-tailwindcss": "^0.8.0",
-    "tailwindcss": "^4.3.2",
-    "typescript-plugin-css-modules": "^5.2.0",
-    "vite": "^8.1.3",
-    "vite-tsconfig-paths": "^6.1.1"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "latest"
   }
 }

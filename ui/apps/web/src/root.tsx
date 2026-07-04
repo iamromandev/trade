@@ -6,10 +6,10 @@ export default component$(() => {
         <QwikRouterProvider>
             <head>
                 <meta charset="utf-8" />
-                <title>AnyDM</title>
+                <title>Trade — Paper Trading Platform</title>
             </head>
             <body lang="en">
-            <RouterOutlet />
+                <RouterOutlet />
             </body>
         </QwikRouterProvider>
     );

@@ -1,60 +1,42 @@
 {
-  "compilerOptions": {
-    // Environment setup & latest features
-    "target": "ESNext",
-    "module": "Preserve",
-    "lib": [
-      "ESNext",
-      "DOM",
-      "WebWorker",
-      "DOM.Iterable"
-    ],
-    "moduleDetection": "force",
-    "jsx": "react-jsx",
-    "jsxImportSource": "@qwik.dev/core",
-    "allowJs": true,
-    "types": ["bun"],
-
-    // Bundler mode
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "noEmit": true,
-
-    // Best practices
-    "strict": true,
-    "skipLibCheck": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "incremental": true,
-    "isolatedModules": true,
-
-    // Some stricter flags (disabled by default)
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false,
-
-    // Other
-    "outDir": "dist",
-    "paths": {
-      "@/*": ["./src/*"]
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "lib": [
+            "ESNext",
+            "DOM",
+            "WebWorker",
+            "DOM.Iterable"
+        ],
+        "moduleResolution": "bundler",
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "incremental": true,
+        "isolatedModules": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "@qwik.dev/core",
+        "noEmit": true,
+        "outDir": "dist",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        },
+        "plugins": [
+            {
+                "name": "typescript-plugin-css-modules"
+            }
+        ]
     },
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
+    "include": [
+        "src",
+        "./*.d.ts",
+        "./*.config.ts"
+    ],
+    "exclude": [
+        "node_modules"
     ]
-  },
-  "include": [
-    "src",
-    "./*.d.ts",
-    "./*.config.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
 }
