@@ -39,3 +39,32 @@ ENV ENV=$ENV WORK_DIR=$WORK_DIR INSTALL_DIR=$INSTALL_DIR PW_DIR=$PW_DIR
 WORKDIR $WORK_DIR
 COPY --from=builder $INSTALL_DIR $INSTALL_DIR
 COPY . $WORK_DIR
+
+
+### prod image ###
+# Build with the target and the same build args the builder stage needs (it has no defaults):
+#   docker buildx build --platform linux/arm64 --target prod \
+#     --build-arg ENV=prod --build-arg WORK_DIR=/workdir --build-arg INSTALL_DIR=/opt/install \
+#     --build-arg PW_DIR=/pwdir -t <repository>:<tag> api
+# Dependencies are copied from builder. Only pyproject.toml, src and scripts are copied: no
+# tests, docs or developer .env. It runs as a non-root user and its default command serves
+# without --reload. Migrations are a separate step:
+#   python -m scripts.migrate
+FROM base AS prod
+ARG ENV WORK_DIR INSTALL_DIR PW_DIR
+ENV ENV=$ENV WORK_DIR=$WORK_DIR INSTALL_DIR=$INSTALL_DIR PW_DIR=$PW_DIR
+
+RUN useradd --system --uid 10001 --no-create-home --shell /usr/sbin/nologin user
+
+WORKDIR $WORK_DIR
+
+COPY --from=builder $INSTALL_DIR $INSTALL_DIR
+COPY --chown=user:user pyproject.toml $WORK_DIR/
+COPY --chown=user:user src $WORK_DIR/src
+COPY --chown=user:user scripts $WORK_DIR/scripts
+
+USER user
+
+EXPOSE 8000
+
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--loop", "uvloop"]
